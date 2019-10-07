@@ -1,42 +1,44 @@
 package practice.problems.stringmanipulation;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MakingAnagrams {
-    // Complete the makeAnagram function below.
     static int makeAnagram(String a, String b) {
-        // expected output is 4
+        String c = a + b;
+        int total = c.length();
+        int counter = 0;
+        int location;
 
-        return 0;
+        List<Character> charA = new ArrayList<>();
+        List<Character> charB = new ArrayList<>();
+
+        for (char ch : a.toCharArray())
+            charA.add(ch);
+
+        for (char ch : b.toCharArray())
+            charB.add(ch);
+
+        Collections.sort(charA);
+        Collections.sort(charB);
+
+        for (int i = 0; i < a.length(); i++) {
+            if (charB.contains(charA.get(i))) {
+                location = charB.indexOf(charA.get(i));
+                charA.set(i, '-');
+                charB.set(location, '-');
+                counter = counter + 2;
+            }
+        }
+
+        return total - counter;
     }
 
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) throws IOException {
-        String a = "cde";
-        String b = "abc";
+        String a = "fcrxzwscanmligyxyvym";
+        String b = "jxwtrhvujlmrpdoqbisbwhmgpmeoke";
         System.out.println("output = " + makeAnagram(a, b));
-
-//        String output = "output.txt";
-//        System.out.println("Environment variable: " + System.getenv("USER"));
-//        System.out.println("Environment variable: " + System.getenv("OUTPUT_PATH"));
-//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-//        String fileLocation = "/home/kike/Documents/workspace-spring-tool-suite-4-4.3.2.RELEASE/HackerRankProblems/output/output.txt";
-//        File file = new File(fileLocation);
-//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileLocation));
-//        System.out.print("Enter first string: ");
-//        String a = scanner.nextLine();
-//        System.out.print("Enter second string: ");
-//        String b = scanner.nextLine();
-//        int res = makeAnagram(a, b);
-//        bufferedWriter.write(String.valueOf(res));
-//        bufferedWriter.newLine();
-//        bufferedWriter.close();
-//        System.out.println("output: " + res);
-        scanner.close();
     }
 }
