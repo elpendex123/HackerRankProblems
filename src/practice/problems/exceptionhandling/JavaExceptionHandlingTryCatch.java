@@ -7,46 +7,32 @@ import java.util.Scanner;
 public class JavaExceptionHandlingTryCatch {
     public static void main(String[] args) {
         int xInt, yInt, zInt = 0;
-//        String x = args[0];
-//        String y = args[1];
-
-//        String x = "10";
-//        String y = "3";
-
-//        String x = "10";
-//        String y = "Hello";
-
-//        String x = "10";
-//        String y = "0";
-
-//        String x = "23.323";
-//        String y = "0";
-
         Scanner scanner = new Scanner(System.in);
-
-//        System.out.print("Enter x: ");
         String x = scanner.next();
-//        System.out.print("Enter y: ");
         String y = scanner.next();
 
         try {
+            if (x.toLowerCase().matches("^\\D+") || y.toLowerCase().matches("^\\D+"))
+                throw new InputMismatchException();
+
             if (x.contains(".") || y.contains("."))
                 throw new InputMismatchException();
-            if (x.toLowerCase().matches("\\p{javaLowerCase}+") || y.toLowerCase().matches("\\p{javaLowerCase}+"))
-                throw new InputMismatchException();
+
             if (y.equals("0"))
                 throw new ArithmeticException();
 
             xInt = Integer.parseInt(x);
             yInt = Integer.parseInt(y);
-            zInt = xInt / yInt;
-        } catch (InputMismatchException ime) {
-            ime.printStackTrace();
-        } catch (ArithmeticException ae) {
-            ae.printStackTrace();
-        }
 
-        System.out.println(zInt);
+            zInt = xInt / yInt;
+            System.out.println(zInt);
+        } catch (InputMismatchException ime) {
+            System.out.println("java.util.InputMismatchException");
+        } catch (ArithmeticException ae) {
+            System.out.println("java.lang.ArithmeticException: / by zero");
+        } catch (NumberFormatException nfe) {
+            System.out.println("java.util.InputMismatchException");
+        }
     }
 }
 
