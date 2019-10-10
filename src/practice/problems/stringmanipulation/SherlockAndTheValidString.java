@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+// TODO: STILL WORKING ON THIS SOLUTION!!!
 public class SherlockAndTheValidString {
     static String isValid(String s) {
         List<Character> characterList = new ArrayList<>();
