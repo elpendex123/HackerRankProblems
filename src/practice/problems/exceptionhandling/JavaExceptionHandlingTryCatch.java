@@ -3,7 +3,6 @@ package practice.problems.exceptionhandling;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// TODO: NEED TO RETURN STRING OUTPUT TO STDOUT INSTEAD OF ACTUAL EXCEPTION
 public class JavaExceptionHandlingTryCatch {
     public static void main(String[] args) {
         int xInt, yInt, zInt = 0;
