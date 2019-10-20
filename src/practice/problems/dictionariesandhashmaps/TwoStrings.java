@@ -3,40 +3,34 @@ package practice.problems.dictionariesandhashmaps;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class TwoStrings {
-    // Complete the twoStrings function below.
     static String twoStrings(String s1, String s2) {
-        boolean match = false;
-        StringBuilder stringBuilder = new StringBuilder();
+        LinkedList<Character> s1List = new LinkedList<>();
+        LinkedList<Character> s2List = new LinkedList<>();
 
-//        if (s1.length() < s2.length()) {
-//            System.out.println("s1 < s2");
-            for (int i = 0; i < s1.length(); i++) {
-                Character character = (char)s1.indexOf(i);
-                stringBuilder.append(character);
-                if (s2.contains(stringBuilder)) {
-                    System.out.println("s2: " + s2.toString() + " contains: " + stringBuilder.toString());
-                    match = true;
-                    break;
-                }
-                stringBuilder.deleteCharAt(0);
-            }
-//        } else {
-//            System.out.println("s2 < s1");
-//            for (int j = 0; j < s2.length(); j++) {
-//                stringBuilder.append(s2.indexOf(j));
-//                if (s1.contains(stringBuilder)) {
-//                    System.out.println("s1: " + s1.toString() + " contains: " + stringBuilder.toString());
-//                    match = true;
-//                    break;
-//                }
-//                stringBuilder = null;
-//            }
-//        }
+        for (int i = 0; i < s1.length(); i++)
+            s1List.add(s1.charAt(i));
 
-        return match ? "YES" : "NO";
+        for (int j = 0; j < s2.length(); j++)
+            s2List.add(s2.charAt(j));
+
+        Collections.sort(s1List);
+        Collections.sort(s2List);
+
+        System.out.println("s1list: " + s1List.toString());
+        System.out.println("s2list: " + s2List.toString());
+
+        int loop = s1List.size() < 27 ? s1List.size() : 27;
+
+        for (int k = 0; k < loop; k++)
+            if (s2List.contains(s1List.get(k)))
+                return "YES";
+
+        return "NO";
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -49,7 +43,12 @@ public class TwoStrings {
         for (int qItr = 0; qItr < q; qItr++) {
             String s1 = scanner.nextLine();
             String s2 = scanner.nextLine();
+
+            long start = System.currentTimeMillis();
             String result = twoStrings(s1, s2);
+            long end = System.currentTimeMillis();
+            System.out.println("time it took: " + (end - start) + " ms");
+
             bufferedWriter.write(result);
             bufferedWriter.newLine();
         }
